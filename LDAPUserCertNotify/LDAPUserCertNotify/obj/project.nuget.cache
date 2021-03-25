@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "CxssSvjx9eWUVs5gahM4BMuFJCqVgv/7sQs2pBT9fZnfwjeJGLx0/ji8WQPqb2dQcxwYrFWxuCXi71xy1NHT1Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Przemek\\Documents\\GitHub\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Przemek\\.nuget\\packages\\ldapfornet\\2.7.11\\ldapfornet.2.7.11.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,107 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "LdapForNet/2.7.11": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/LdapForNet.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/LdapForNet.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LdapForNet/2.7.11": {
+      "sha512": "RvSVCkbYezpj9p3vYpdC7pnYDF86A/DCcOPKjuLHsc1JpWJAkFV3ue+89W+W+dZKeLivLfRiG8F+0Ty3yzSFxw==",
+      "type": "package",
+      "path": "ldapfornet/2.7.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ldapfornet.2.7.11.nupkg.sha512",
+        "ldapfornet.nuspec",
+        "lib/netcoreapp3.1/LdapForNet.dll",
+        "lib/netstandard2.0/LdapForNet.dll",
+        "lib/netstandard2.1/LdapForNet.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "LdapForNet >= 2.7.11"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Przemek\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Przemek\\Documents\\GitHub\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify.csproj",
+      "projectName": "LDAPUserCertNotify",
+      "projectPath": "C:\\Users\\Przemek\\Documents\\GitHub\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify.csproj",
+      "packagesPath": "C:\\Users\\Przemek\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Przemek\\Documents\\GitHub\\LDAPUserCertNotify\\LDAPUserCertNotify\\LDAPUserCertNotify\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Przemek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "dependencies": {
+          "LdapForNet": {
+            "target": "Package",
+            "version": "[2.7.11, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
