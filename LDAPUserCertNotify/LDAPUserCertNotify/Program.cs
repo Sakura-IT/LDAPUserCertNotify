@@ -11,16 +11,30 @@ namespace LDAPUserCertNotify
 {
     class Program
     {
+        static string host;
+        static string authString;
+        static string auth;
+        static string @base;
+        static string filter;
+        static string portStr;
+        static string who;
+        static string password;
+        static string sid;
+
+        static int port;
+
         static void Main(string[] args)
         {
-            var cmds = ParseCommandLine(args);
-            cmds.TryGetValue("host", out var host);
-            cmds.TryGetValue("auth", out var authString);
-            cmds.TryGetValue("base", out var @base);
-            cmds.TryGetValue("filter", out var filter);
-            cmds.TryGetValue("port", out var portStr);
+            SetLDAPParams();
+
+            //var cmds = ParseCommandLine(args);
+            //cmds.TryGetValue("host", out var host);
+            //cmds.TryGetValue("auth", out var authString);
+            //cmds.TryGetValue("base", out var @base);
+            //cmds.TryGetValue("filter", out var filter);
+            //cmds.TryGetValue("port", out var portStr);
             int.TryParse(portStr, out var port);
-            var auth = authString == LdapAuthMechanism.GSSAPI ? LdapAuthMechanism.GSSAPI : LdapAuthMechanism.SIMPLE;
+            auth = authString == LdapAuthMechanism.GSSAPI ? LdapAuthMechanism.GSSAPI : LdapAuthMechanism.SIMPLE;
             host = host ?? "ldap.forumsys.com";
             @base = @base ?? "dc=example,dc=com";
             filter = filter ?? "(objectclass=*)";
@@ -32,7 +46,8 @@ namespace LDAPUserCertNotify
                 Console.CancelKeyPress += (sender, eventArgs) => token.Cancel();
                 while (!token.IsCancellationRequested)
                 {
-                    UsingOpenLdap(auth, host, @base, port, filter, cmds).Wait();
+                    UsingOpenLdap(auth, host, @base, port, filter).Wait();
+                    Thread.Sleep(5000);
                 }
             }
             catch (Exception e)
@@ -40,6 +55,28 @@ namespace LDAPUserCertNotify
                 Console.WriteLine(e);
             }
             Console.WriteLine("End");
+        }
+
+        static void SetLDAPParams()
+        {
+            Console.Write("host:");
+            host = Console.ReadLine();
+            Console.Write("authString:");
+            authString = Console.ReadLine();
+            Console.Write("auth:");
+            auth = Console.ReadLine();
+            Console.Write("@base:");
+            @base = Console.ReadLine();
+            Console.Write("filter:");
+            filter = Console.ReadLine();
+            Console.Write("portStr:");
+            portStr = Console.ReadLine();
+            Console.Write("who:");
+            who = Console.ReadLine();
+            Console.Write("password:");
+            password = Console.ReadLine();
+            Console.Write("sid:");
+            sid = Console.ReadLine();
         }
 
         private static Dictionary<string, string> ParseCommandLine(string[] args)
@@ -50,7 +87,7 @@ namespace LDAPUserCertNotify
                 .ToDictionary(_ => _[1].Value, _ => _[2].Value);
         }
 
-        private static async Task UsingOpenLdap(string authType, string host, string @base, int port, string filter, IDictionary<string, string> cmds)
+        private static async Task UsingOpenLdap(string authType, string host, string @base, int port, string filter)
         {
             Console.WriteLine($"{nameof(authType)}:{authType}; {nameof(host)}:{host}; {nameof(@base)}:{@base}; {nameof(port)}:{port} ");
             using (var cn = new LdapConnection())
@@ -62,8 +99,6 @@ namespace LDAPUserCertNotify
                 }
                 else
                 {
-                    cmds.TryGetValue("who", out var who);
-                    cmds.TryGetValue("password", out var password);
                     who = who ?? "cn=read-only-admin,dc=example,dc=com";
                     password = password ?? "password";
                     cn.Bind(LdapAuthMechanism.SIMPLE, who, password);
@@ -71,7 +106,7 @@ namespace LDAPUserCertNotify
 
                 IList<LdapEntry> entries;
 
-                if (cmds.TryGetValue("sid", out var sid))
+                if (!string.IsNullOrEmpty(sid))
                 {
                     entries = await cn.SearchBySidAsync(@base, sid);
                 }
