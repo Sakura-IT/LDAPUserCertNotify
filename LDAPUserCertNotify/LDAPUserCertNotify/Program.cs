@@ -92,13 +92,20 @@ namespace LDAPUserCertNotify
 
         private static async Task UsingOpenLdap(string authType, string host, string @base, int port, string filter)
         {
-            Console.WriteLine($"{nameof(authType)}:{authType}; {nameof(host)}:{host}; {nameof(@base)}:{@base}; {nameof(port)}:{port} ");
+            Console.WriteLine($"{nameof(authType)}:{authType}; {nameof(host)}:{host}; {nameof(@base)}:{@base}; {nameof(port)}:{port}; {nameof(who)}:{who}; {nameof(password)}:{password}; ");
             using (var cn = new LdapConnection())
             {
                 cn.Connect(host, port);
+		cn.StartTransportLayerSecurity(true); 
+
                 if (authType == LdapAuthMechanism.GSSAPI)
                 {
                     await cn.BindAsync();
+                }
+		/* Perform anonymous bind if not using GSSAPI and password was not provided */
+                else if ((authType == LdapAuthMechanism.SIMPLE) && password == null) 
+                {
+                    cn.Bind(LdapAuthType.Anonymous, new LdapCredential());
                 }
                 else
                 {
