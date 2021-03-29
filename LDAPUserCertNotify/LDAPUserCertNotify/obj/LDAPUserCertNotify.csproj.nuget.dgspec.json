@@ -48,6 +48,10 @@
             "LdapForNet": {
               "target": "Package",
               "version": "[2.7.11, )"
+            },
+            "System.Windows.Extensions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
