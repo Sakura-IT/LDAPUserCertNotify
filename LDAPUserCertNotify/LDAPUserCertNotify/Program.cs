@@ -25,14 +25,16 @@ namespace LDAPUserCertNotify
 
         static void Main(string[] args)
         {
-            SetLDAPParams();
+            //SetLDAPParams();
 
-            //var cmds = ParseCommandLine(args);
-            //cmds.TryGetValue("host", out var host);
-            //cmds.TryGetValue("auth", out var authString);
-            //cmds.TryGetValue("base", out var @base);
-            //cmds.TryGetValue("filter", out var filter);
-            //cmds.TryGetValue("port", out var portStr);
+            var cmds = ParseCommandLine(args);
+            cmds.TryGetValue("host", out var host);
+            cmds.TryGetValue("auth", out var authString);
+            cmds.TryGetValue("base", out var @base);
+            cmds.TryGetValue("filter", out var filter);
+            cmds.TryGetValue("port", out var portStr);
+            cmds.TryGetValue("user", out var who);
+            cmds.TryGetValue("password", out var password);
             int.TryParse(portStr, out var port);
             auth = authString == LdapAuthMechanism.GSSAPI ? LdapAuthMechanism.GSSAPI : LdapAuthMechanism.SIMPLE;
             host = host ?? "ldap.forumsys.com";
@@ -57,7 +59,7 @@ namespace LDAPUserCertNotify
             Console.WriteLine("End");
         }
 
-        static void SetLDAPParams()
+/*        static void SetLDAPParams()
         {
             Console.Write("host:");
             host = Console.ReadLine();
@@ -78,7 +80,7 @@ namespace LDAPUserCertNotify
             Console.Write("sid:");
             sid = Console.ReadLine();
         }
-
+*/
         private static Dictionary<string, string> ParseCommandLine(string[] args)
         {
             var pattern = "^--([^=\"]*)=\"?(.*)\"?$";
